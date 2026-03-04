@@ -1,8 +1,9 @@
+# ---------- Event-Entitäten (NFT) ----------
 type Approval @entity(immutable: true) {
   id: Bytes!
-  owner: Bytes! # address
-  approved: Bytes! # address
-  tokenId: BigInt! # uint256
+  owner: Bytes!
+  approved: Bytes!
+  tokenId: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -10,9 +11,9 @@ type Approval @entity(immutable: true) {
 
 type ApprovalForAll @entity(immutable: true) {
   id: Bytes!
-  owner: Bytes! # address
-  operator: Bytes! # address
-  approved: Boolean! # bool
+  owner: Bytes!
+  operator: Bytes!
+  approved: Boolean!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -20,8 +21,8 @@ type ApprovalForAll @entity(immutable: true) {
 
 type BlockMirrored @entity(immutable: true) {
   id: Bytes!
-  tokenId: BigInt! # uint256
-  mirrorId: BigInt! # uint256
+  tokenId: BigInt!
+  mirrorId: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -29,10 +30,10 @@ type BlockMirrored @entity(immutable: true) {
 
 type BlockRevealed @entity(immutable: true) {
   id: Bytes!
-  tokenId: BigInt! # uint256
-  piDigit: Int! # uint8
-  phiDigit: Int! # uint8
-  rarity: Int! # uint8
+  tokenId: BigInt!
+  piDigit: Int!
+  phiDigit: Int!
+  rarity: Int!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -40,7 +41,7 @@ type BlockRevealed @entity(immutable: true) {
 
 type MetadataUpdate @entity(immutable: true) {
   id: Bytes!
-  _tokenId: BigInt! # uint256
+  _tokenId: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -48,8 +49,8 @@ type MetadataUpdate @entity(immutable: true) {
 
 type OwnershipTransferred @entity(immutable: true) {
   id: Bytes!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
+  previousOwner: Bytes!
+  newOwner: Bytes!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -57,7 +58,7 @@ type OwnershipTransferred @entity(immutable: true) {
 
 type RowExpanded @entity(immutable: true) {
   id: Bytes!
-  newRow: BigInt! # uint256
+  newRow: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -65,9 +66,179 @@ type RowExpanded @entity(immutable: true) {
 
 type Transfer @entity(immutable: true) {
   id: Bytes!
-  from: Bytes! # address
-  to: Bytes! # address
-  tokenId: BigInt! # uint256
+  from: Bytes!
+  to: Bytes!
+  tokenId: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ---------- Zustands-Entitäten (veränderlich) ----------
+type Token @entity(immutable: false) {
+  id: ID!                   # Token ID als String
+  owner: User!
+  revealed: Boolean!
+  farm: Farm
+}
+
+type User @entity(immutable: false) {
+  id: ID!                   # Adresse als String
+  tokens: [Token!]! @derivedFrom(field: "owner")
+}
+
+# ---------- Farming V1 ----------
+type Farm @entity(immutable: false) {
+  id: ID!                   # Token ID
+  startTime: BigInt!
+  lastClaim: BigInt
+  active: Boolean!
+}
+
+# ---------- Pirates V1/V2 ----------
+type Attack @entity(immutable: false) {
+  id: ID!                   # attackId (uint256)
+  attacker: Bytes!          # Adresse des Angreifers
+  target: BigInt!           # tokenId des Ziels
+  startTime: BigInt!
+  endTime: BigInt!
+  executed: Boolean!
+  stolenAmount: BigInt
+}
+
+# ---------- Mercenary V1/V2 ----------
+type Protection @entity(immutable: false) {
+  id: ID!                   # Token ID
+  level: BigInt!            # Schutzlevel
+  expiresAt: BigInt!
+  active: Boolean!
+}
+
+# ---------- Partnership V1/V2 ----------
+type Partnership @entity(immutable: false) {
+  id: ID!                   # Token ID
+  name: String!
+  tokenAddress: Bytes!
+  blockId: BigInt!
+  active: Boolean!
+}
+
+# ---------- INPI Token ----------
+type INPITransfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type INPIApproval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes!
+  spender: Bytes!
+  value: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ---------- Pitrone Token ----------
+type PitroneTransfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PitroneApproval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes!
+  spender: Bytes!
+  value: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PitroneExchange @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes!
+  inpiAmount: BigInt!
+  pitroneAmount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ---------- ResourceToken (ERC1155) ----------
+type ResourceTransfer @entity(immutable: true) {
+  id: Bytes!
+  operator: Bytes!
+  from: Bytes!
+  to: Bytes!
+  resourceId: BigInt!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ResourceApprovalForAll @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes!
+  operator: Bytes!
+  approved: Boolean!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ResourceBalance @entity(immutable: false) {
+  id: ID!                     # "<adresse>-<resourceId>"
+  account: Bytes!
+  resourceId: BigInt!
+  amount: BigInt!
+}
+
+# ---------- Farming V2 ----------
+type FarmV2 @entity(immutable: false) {
+  id: ID!                     # Token ID
+  startTime: BigInt!
+  lastClaim: BigInt
+  active: Boolean!
+}
+
+type ResourceClaimed @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  resourceId: BigInt!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ResourceStolen @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  thief: Bytes!
+  resourceId: BigInt!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ResourceDeposited @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  resourceId: BigInt!
+  amount: BigInt!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
