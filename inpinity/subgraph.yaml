@@ -228,7 +228,7 @@ dataSources:
           handler: handleApprovalForAll
       file: ./src/resource-token.ts
 
-# ---------- FARMING V2 ----------
+  # ---------- FARMING V2 ----------
   - kind: ethereum
     name: FarmingV2
     network: base
@@ -256,7 +256,7 @@ dataSources:
           handler: handleResourcesStolenV2
       file: ./src/farming-v2.ts
 
-  ## ---------- PIRATES V2 ----------
+  # ---------- PIRATES V2 ----------
   - kind: ethereum
     name: PiratesV2
     network: base
@@ -328,7 +328,8 @@ dataSources:
         - event: PartnerTokenFound(indexed uint256,indexed address,uint256)
           handler: handlePartnerTokenFoundV2
       file: ./src/partnership-v2.ts
-       # ---------- FARMING V3 ----------
+
+  # ---------- FARMING V3 ----------
   - kind: ethereum
     name: FarmingV3
     network: base
@@ -381,4 +382,201 @@ dataSources:
           handler: handleAttackStartedV3
         - event: AttackExecuted(indexed uint256,indexed address,indexed uint256,uint8,uint256,uint256,uint256)
           handler: handleAttackExecutedV3
-      file: ./src/pirates-v3.ts 
+      file: ./src/pirates-v3.ts
+
+  # ---------- FARMING V4 ----------
+  - kind: ethereum
+    name: FarmingV4
+    network: base
+    source:
+      address: "0xa7F093c893aeF7dA632e5Fa23971ad3C00Cc5bEd"
+      abi: FarmingV4
+      startBlock: 43006854
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - FarmV4
+        - FarmingBoostV4
+        - ClaimV4
+        - StealV4
+      abis:
+        - name: FarmingV4
+          file: ./abis/FarmingV4.json
+      eventHandlers:
+        - event: FarmStarted(indexed uint256,indexed address,uint256)
+          handler: handleFarmStartedV4
+        - event: FarmStopped(indexed uint256,uint256)
+          handler: handleFarmStoppedV4
+        - event: BoostBought(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handleBoostBoughtV4
+        - event: ResourcesClaimed(indexed uint256,uint256[],uint256[])
+          handler: handleResourcesClaimedV4
+        - event: ResourcesStolen(indexed uint256,indexed address,uint8,uint256)
+          handler: handleResourcesStolenV4
+      file: ./src/farming-v4.ts
+
+  # ---------- PIRATES V4 ----------
+  - kind: ethereum
+    name: PiratesV4
+    network: base
+    source:
+      address: "0x393726fc6f54A07bca710ed7F1c93491CE7daF03"
+      abi: PiratesV4
+      startBlock: 43007097
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - AttackV4
+        - PirateBoostV4
+        - PirateBoostBoughtV4
+      abis:
+        - name: PiratesV4
+          file: ./abis/PiratesV4.json
+      eventHandlers:
+        - event: AttackStarted(indexed uint256,indexed address,indexed uint256,uint256,uint8,uint256,uint256)
+          handler: handleAttackStartedV4
+        - event: AttackExecuted(indexed uint256,indexed address,indexed uint256,uint8,uint256,uint256,uint256)
+          handler: handleAttackExecutedV4
+        - event: PirateBoostBought(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handlePirateBoostBoughtV4
+      file: ./src/pirates-v4.ts
+
+        # ---------- FARMING V5 ----------
+  - kind: ethereum
+    name: FarmingV5
+    network: base
+    source:
+      address: "0xe0246dC9c553E9cD741013C21BD217912a9DA0B2"
+      abi: FarmingV5
+      startBlock: 43061200
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - FarmV5
+        - FarmingBoostV5
+        - ClaimV5
+        - StealV5
+      abis:
+        - name: FarmingV5
+          file: ./abis/FarmingV5.json
+      eventHandlers:
+        - event: FarmStarted(indexed uint256,indexed address,uint256)
+          handler: handleFarmStartedV5
+        - event: FarmStopped(indexed uint256,uint256)
+          handler: handleFarmStoppedV5
+        - event: BoostBought(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handleBoostBoughtV5
+        - event: ResourcesClaimed(indexed uint256,indexed address,uint256[],uint256[])
+          handler: handleResourcesClaimedV5
+        - event: ResourcesStolen(indexed uint256,indexed address,uint8,uint256)
+          handler: handleResourcesStolenV5
+      file: ./src/farming-v5.ts
+
+        # ---------- PIRATES V5 ----------
+  - kind: ethereum
+    name: PiratesV5
+    network: base
+    source:
+      address: "0xe76b03A848dE22DdbbF34994e650d2E887426879"
+      abi: PiratesV5
+      startBlock: 43061239
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - AttackV5
+        - PirateBoostV5
+        - PirateBoostBoughtV5
+      abis:
+        - name: PiratesV5
+          file: ./abis/PiratesV5.json
+      eventHandlers:
+        - event: AttackStarted(indexed uint256,indexed address,indexed uint256,uint256,uint8,uint256,uint256)
+          handler: handleAttackStartedV5
+        - event: AttackExecuted(indexed uint256,indexed address,indexed uint256,uint8,uint256,uint256,uint256)
+          handler: handleAttackExecutedV5
+        - event: PirateBoostBought(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handlePirateBoostBoughtV5
+      file: ./src/pirates-v5.ts
+
+        # ---------- FARMING V6 ----------
+  - kind: ethereum
+    name: FarmingV6
+    network: base
+    source:
+      address: "0x55Ee68e576E97288802D3b887d79Bf7177EfCb92"
+      abi: FarmingV6
+      startBlock: 43106785
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - FarmV6
+        - FarmingBoostV6
+        - ClaimV6
+        - StealV6
+        - FarmExpiredV6
+        - BoostPaymentSplitV6
+      abis:
+        - name: FarmingV6
+          file: ./abis/FarmingV6.json
+      eventHandlers:
+        - event: FarmStarted(indexed uint256,indexed address,uint256)
+          handler: handleFarmStartedV6
+        - event: FarmStopped(indexed uint256,uint256)
+          handler: handleFarmStoppedV6
+        - event: FarmExpired(indexed uint256,uint256)
+          handler: handleFarmExpiredV6
+        - event: BoostBought(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handleBoostBoughtV6
+        - event: BoostPaymentSplit(indexed uint256,indexed address,uint256,uint256,uint256,uint256)
+          handler: handleBoostPaymentSplitV6
+        - event: ResourcesClaimed(indexed uint256,indexed address,uint256[],uint256[])
+          handler: handleResourcesClaimedV6
+        - event: ResourcesStolen(indexed uint256,indexed address,uint8,uint256)
+          handler: handleResourcesStolenV6
+      file: ./src/farming-v6.ts
+
+  # ---------- PIRATES V6 ----------
+  - kind: ethereum
+    name: PiratesV6
+    network: base
+    source:
+      address: "0xc3A9c40fE8664A0aa9243a8DEe27ADf4E4f9e731"
+      abi: PiratesV6
+      startBlock: 43106841
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - AttackV6
+        - PirateBoostV6
+        - PirateBoostBoughtV6
+        - PoolSharesV6
+        - RoundUpConfigV6
+      abis:
+        - name: PiratesV6
+          file: ./abis/PiratesV6.json
+      eventHandlers:
+        - event: AttackStarted(indexed uint256,indexed address,indexed uint256,uint256,uint8,uint256,uint256)
+          handler: handleAttackStartedV6
+        - event: AttackExecuted(indexed uint256,indexed address,indexed uint256,uint8,uint256,uint256,uint256)
+          handler: handleAttackExecutedV6
+        - event: AttackCancelled(indexed uint256,indexed uint256)
+          handler: handleAttackCancelledV6
+        - event: PirateBoostBought(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handlePirateBoostBoughtV6
+        - event: PoolSharesUpdated(uint256,uint256,uint256)
+          handler: handlePoolSharesUpdatedV6
+        - event: RoundUpToMinimumOneUpdated(bool)
+          handler: handleRoundUpToMinimumOneUpdatedV6
+      file: ./src/pirates-v6.ts

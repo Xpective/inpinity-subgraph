@@ -291,3 +291,312 @@ type AttackV3 @entity(immutable: false) {
   txHashStart: Bytes
   txHashExecute: Bytes
 }
+# ============ FARMING V4 ============
+
+type FarmV4 @entity(immutable: false) {
+  id: ID!                     # tokenId as string
+  owner: Bytes!                # Besitzer des NFTs
+  startTime: BigInt!
+  lastAccrualTime: BigInt!
+  boostExpiry: BigInt!
+  active: Boolean!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FarmingBoostV4 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  daysAmount: BigInt!
+  cost: BigInt!
+  newExpiry: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ClaimV4 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  resourceIds: [BigInt!]!
+  amounts: [BigInt!]!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type StealV4 @entity(immutable: true) {
+  id: Bytes!
+  targetTokenId: BigInt!
+  attacker: Bytes!
+  resourceId: Int!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ============ PIRATES V4 ============
+
+type PirateBoostV4 @entity(immutable: false) {
+  id: ID!                     # tokenId as string
+  owner: Bytes!
+  expiry: BigInt!
+}
+
+type PirateBoostBoughtV4 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  daysAmount: BigInt!
+  cost: BigInt!
+  newExpiry: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AttackV4 @entity(immutable: false) {
+  id: ID!                     # "<targetTokenId>-<attackIndex>"
+  attacker: Bytes!
+  attackerTokenId: BigInt!
+  targetTokenId: BigInt!
+  attackIndex: BigInt!
+  startTime: BigInt!
+  endTime: BigInt!
+  resource: Int!
+  executed: Boolean!
+  protectionLevel: BigInt
+  effectiveStealPercent: BigInt
+  stolenAmount: BigInt
+  txHashStart: Bytes
+  txHashExecute: Bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+# ============ FARMING V5 ============
+
+type FarmV5 @entity(immutable: false) {
+  id: ID!                     # tokenId as string
+  owner: Bytes
+  startTime: BigInt
+  lastAccrualTime: BigInt
+  lastClaimTime: BigInt
+  boostExpiry: BigInt
+  stopTime: BigInt
+  active: Boolean!
+  updatedAt: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+type FarmingBoostV5 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  daysAmount: BigInt!
+  cost: BigInt!
+  newExpiry: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ClaimV5 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  resourceIds: [BigInt!]!
+  amounts: [BigInt!]!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type StealV5 @entity(immutable: true) {
+  id: Bytes!
+  targetTokenId: BigInt!
+  attacker: Bytes!
+  resourceId: Int!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ============ PIRATES V5 ============
+
+type PirateBoostV5 @entity(immutable: false) {
+  id: ID!                     # tokenId as string
+  owner: Bytes!
+  expiry: BigInt!
+  updatedAt: BigInt!
+}
+
+type PirateBoostBoughtV5 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  daysAmount: BigInt!
+  cost: BigInt!
+  newExpiry: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AttackV5 @entity(immutable: false) {
+  id: ID!                     # "<targetTokenId>-<attackIndex>"
+  attacker: Bytes!
+  attackerTokenId: BigInt!
+  targetTokenId: BigInt!
+  attackIndex: BigInt!
+  resource: Int!
+  startTime: BigInt!
+  endTime: BigInt!
+  executed: Boolean!
+  cancelled: Boolean!
+  protectionLevel: BigInt
+  effectiveStealPercent: BigInt
+  stolenAmount: BigInt
+  txHashStart: Bytes
+  txHashExecute: Bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+# ============ FARMING V6 ============
+
+type FarmV6 @entity(immutable: false) {
+  id: ID!                     # tokenId as string
+  owner: Bytes
+  startTime: BigInt
+  lastAccrualTime: BigInt
+  lastClaimTime: BigInt
+  boostExpiry: BigInt
+  stopTime: BigInt
+  active: Boolean!
+  activeUntil: BigInt
+  updatedAt: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+type FarmingBoostV6 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  daysAmount: BigInt!
+  cost: BigInt!
+  newExpiry: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ClaimV6 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  resourceIds: [BigInt!]!
+  amounts: [BigInt!]!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type StealV6 @entity(immutable: true) {
+  id: Bytes!
+  targetTokenId: BigInt!
+  attacker: Bytes!
+  resourceId: Int!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FarmExpiredV6 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  expiredAt: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BoostPaymentSplitV6 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  payer: Bytes!
+  totalAmount: BigInt!
+  treasuryAmount: BigInt!
+  inpiPoolAmount: BigInt!
+  pitronePoolAmount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ============ PIRATES V6 ============
+
+type PirateBoostV6 @entity(immutable: false) {
+  id: ID!                     # tokenId as string
+  owner: Bytes!
+  expiry: BigInt!
+  updatedAt: BigInt!
+}
+
+type PirateBoostBoughtV6 @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  owner: Bytes!
+  daysAmount: BigInt!
+  totalCost: BigInt!
+  newExpiry: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AttackV6 @entity(immutable: false) {
+  id: ID!                     # "<targetTokenId>-<attackIndex>"
+  attacker: Bytes!
+  attackerTokenId: BigInt!
+  targetTokenId: BigInt!
+  attackIndex: BigInt!
+  resource: Int!
+  startTime: BigInt!
+  endTime: BigInt!
+  executed: Boolean!
+  cancelled: Boolean!
+  protectionLevel: BigInt
+  effectiveStealPercent: BigInt
+  stolenAmount: BigInt
+  txHashStart: Bytes
+  txHashExecute: Bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PoolSharesV6 @entity(immutable: false) {
+  id: ID!                     # immer "current"
+  pitronePoolShare: BigInt!
+  inpiPoolShare: BigInt!
+  treasuryShare: BigInt!
+  updatedAt: BigInt!
+  transactionHash: Bytes!
+}
+
+type RoundUpConfigV6 @entity(immutable: false) {
+  id: ID!                     # immer "current"
+  enabled: Boolean!
+  updatedAt: BigInt!
+  transactionHash: Bytes!
+}
+
