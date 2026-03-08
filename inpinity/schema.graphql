@@ -95,15 +95,25 @@ type Farm @entity(immutable: false) {
   active: Boolean!
 }
 
+# ---------- Event-Entitäten (NFT) ----------
+# ... (bleibt alles gleich, nur die beiden Änderungen unten)
+
 # ---------- Pirates V1/V2 ----------
 type Attack @entity(immutable: false) {
   id: ID!                   # attackId (uint256)
   attacker: Bytes!          # Adresse des Angreifers
   target: BigInt!           # tokenId des Ziels
+  attackIndex: BigInt       # <-- NEU: Index des Angriffs (für V2)
   startTime: BigInt!
   endTime: BigInt!
   executed: Boolean!
   stolenAmount: BigInt
+}
+
+# ---------- NEU: Zähler für Angriffe pro Ziel (für V2) ----------
+type TargetAttackCounter @entity(immutable: false) {
+  id: ID!                   # targetTokenId als String
+  count: BigInt!            # Anzahl der bisherigen Angriffe auf dieses Ziel
 }
 
 # ---------- Mercenary V1/V2 ----------
@@ -242,4 +252,42 @@ type ResourceDeposited @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+# ---------- FARMING V3 ----------
+type FarmV3 @entity(immutable: false) {
+  id: ID!                 # tokenId as string
+  startTime: BigInt!
+  lastAccrualTime: BigInt!
+  boostExpiry: BigInt!
+  active: Boolean!
+}
+
+type Boost @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  daysAmount: BigInt!
+  cost: BigInt!
+  newExpiry: BigInt!
+  buyer: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# ---------- PIRATES V3 ----------
+type AttackV3 @entity(immutable: false) {
+  id: ID!                 # "<targetTokenId>-<attackIndex>"
+  attacker: Bytes!
+  attackerTokenId: BigInt!
+  target: BigInt!
+  attackIndex: BigInt!
+  startTime: BigInt!
+  endTime: BigInt!
+  resource: Int!
+  executed: Boolean!
+  protectionLevel: BigInt
+  effectiveStealPercent: BigInt
+  stolenAmount: BigInt
+  txHashStart: Bytes
+  txHashExecute: Bytes
 }

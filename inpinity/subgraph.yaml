@@ -256,20 +256,21 @@ dataSources:
           handler: handleResourcesStolenV2
       file: ./src/farming-v2.ts
 
-  # ---------- PIRATES V2 ----------
+  ## ---------- PIRATES V2 ----------
   - kind: ethereum
     name: PiratesV2
     network: base
     source:
       address: "0x46290466327b0Fab5791f030f8487321635Eeb37"
       abi: PiratesV2
-      startBlock: 42890760   # ⚠️ Bitte prüfe auf Basescan: deine Angabe war 4289076, vermutlich fehlt eine Ziffer. Korrigiere falls nötig.
+      startBlock: 42890765
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
       language: wasm/assemblyscript
       entities:
         - Attack
+        - TargetAttackCounter
       abis:
         - name: PiratesV2
           file: ./abis/PiratesV2.json
@@ -279,7 +280,7 @@ dataSources:
         - event: AttackExecuted(indexed uint256,indexed address,uint256)
           handler: handleAttackExecutedV2
       file: ./src/pirates-v2.ts
-
+      
   # ---------- MERCENARY V2 ----------
   - kind: ethereum
     name: MercenaryV2
@@ -327,3 +328,57 @@ dataSources:
         - event: PartnerTokenFound(indexed uint256,indexed address,uint256)
           handler: handlePartnerTokenFoundV2
       file: ./src/partnership-v2.ts
+       # ---------- FARMING V3 ----------
+  - kind: ethereum
+    name: FarmingV3
+    network: base
+    source:
+      address: "0xE79445C9ef97B8156BB505D784C0356E54432AD9"
+      abi: FarmingV3
+      startBlock: 42937196
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - FarmV3
+        - Boost
+      abis:
+        - name: FarmingV3
+          file: ./abis/FarmingV3.json
+      eventHandlers:
+        - event: FarmStarted(indexed uint256,uint256)
+          handler: handleFarmStartedV3
+        - event: FarmStopped(indexed uint256,uint256)
+          handler: handleFarmStoppedV3
+        - event: BoostBought(indexed uint256,uint256,uint256,uint256)
+          handler: handleBoostBoughtV3
+        - event: ResourcesClaimed(indexed uint256,uint256[],uint256[])
+          handler: handleResourcesClaimedV3
+        - event: ResourcesStolen(indexed uint256,indexed address,uint8,uint256)
+          handler: handleResourcesStolenV3
+      file: ./src/farming-v3.ts
+
+  # ---------- PIRATES V3 ----------
+  - kind: ethereum
+    name: PiratesV3
+    network: base
+    source:
+      address: "0xC3544804cea908b8Ac6752B4F47609e1c22DaF5d"
+      abi: PiratesV3
+      startBlock: 42937335
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - AttackV3
+      abis:
+        - name: PiratesV3
+          file: ./abis/PiratesV3.json
+      eventHandlers:
+        - event: AttackStarted(indexed uint256,indexed address,indexed uint256,uint256,uint8,uint256)
+          handler: handleAttackStartedV3
+        - event: AttackExecuted(indexed uint256,indexed address,indexed uint256,uint8,uint256,uint256,uint256)
+          handler: handleAttackExecutedV3
+      file: ./src/pirates-v3.ts 
