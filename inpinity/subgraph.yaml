@@ -580,3 +580,47 @@ dataSources:
         - event: RoundUpToMinimumOneUpdated(bool)
           handler: handleRoundUpToMinimumOneUpdatedV6
       file: ./src/pirates-v6.ts
+# ---------- MERCENARY V3 ----------
+  - kind: ethereum
+    name: MercenaryV3
+    network: base
+    source:
+      address: "0xC0C81D6625101bE19edEdF6C85a72A1A69DAecbF"
+      abi: MercenaryV3
+      startBlock: 43235937
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - MercenarySlotV3
+        - MercenaryTokenProtectionV3
+        - DefenderProfileV3
+        - MercenaryCleanupV3
+        - MercenaryTitleV3
+        - MercenaryPointsEventV3
+      abis:
+        - name: MercenaryV3
+          file: ./abis/MercenaryV3.json
+      eventHandlers:
+        - event: ProtectionSet(indexed address,indexed uint8,indexed uint256,uint8,uint64,uint64)
+          handler: handleProtectionSet
+        - event: ProtectionExtended(indexed address,indexed uint8,indexed uint256,uint64,uint64,uint256)
+          handler: handleProtectionExtended
+        - event: ProtectionCancelled(indexed address,indexed uint8,indexed uint256,uint64,string)
+          handler: handleProtectionCancelled
+        - event: ProtectionMoved(indexed address,indexed uint8,indexed uint256,uint256,uint64,uint64)
+          handler: handleProtectionMoved
+        - event: EmergencyProtectionMoved(indexed address,indexed uint8,indexed uint256,uint256,uint64,uint64)
+          handler: handleEmergencyProtectionMoved
+        - event: ProtectionExpired(indexed address,indexed uint8,indexed uint256,uint64)
+          handler: handleProtectionExpired
+        - event: ProtectionSlotUnlocked(indexed address,uint8)
+          handler: handleProtectionSlotUnlocked
+        - event: DefenderPointsAwarded(indexed address,indexed uint256,uint256,string)
+          handler: handleDefenderPointsAwarded
+        - event: CleanupRewardPaid(indexed address,indexed uint256,uint256,uint256)
+          handler: handleCleanupRewardPaid
+        - event: BastionTitleSet(indexed address,string)
+          handler: handleBastionTitleSet
+      file: ./src/mercenary-v3.ts

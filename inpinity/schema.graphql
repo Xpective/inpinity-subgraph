@@ -599,4 +599,87 @@ type RoundUpConfigV6 @entity(immutable: false) {
   updatedAt: BigInt!
   transactionHash: Bytes!
 }
+# ============ MERCENARY V3 ============
 
+type MercenarySlotV3 @entity(immutable: false) {
+  id: ID!
+  user: Bytes!
+  slotIndex: Int!
+  tokenId: BigInt!
+  startTime: BigInt!
+  expiry: BigInt!
+  cooldownUntil: BigInt!
+  emergencyReadyAt: BigInt!
+  protectionTier: Int!
+  protectionPercent: BigInt!
+  active: Boolean!
+  lastReason: String!
+  updatedAt: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+type MercenaryTokenProtectionV3 @entity(immutable: false) {
+  id: ID!
+  tokenId: BigInt!
+  user: Bytes!
+  slotIndex: Int!
+  protectionTier: Int!
+  protectionPercent: BigInt!
+  expiry: BigInt!
+  active: Boolean!
+  updatedAt: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+type DefenderProfileV3 @entity(immutable: false) {
+  id: ID!
+  user: Bytes!
+  points: BigInt!
+  rank: Int!
+  rankName: String!
+  discountBps: BigInt!
+  totalProtectedDays: BigInt!
+  successfulDefenses: BigInt!
+  sameBlockExtensions: BigInt!
+  cleanupActions: BigInt!
+  emergencyMovesUsed: BigInt!
+  slotsUnlocked: Int!
+  freeCleanupCredits: BigInt!
+  bastionTitle: String!
+  updatedAt: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
+
+type MercenaryCleanupV3 @entity(immutable: true) {
+  id: Bytes!
+  cleaner: Bytes!
+  tokenId: BigInt!
+  rewardResourceId: BigInt!
+  amount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MercenaryTitleV3 @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes!
+  title: String!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MercenaryPointsEventV3 @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes!
+  tokenId: BigInt!
+  points: BigInt!
+  reason: String!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
