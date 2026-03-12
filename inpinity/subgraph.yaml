@@ -580,6 +580,8 @@ dataSources:
         - event: RoundUpToMinimumOneUpdated(bool)
           handler: handleRoundUpToMinimumOneUpdatedV6
       file: ./src/pirates-v6.ts
+
+      
 # ---------- MERCENARY V3 ----------
   - kind: ethereum
     name: MercenaryV3
@@ -624,3 +626,48 @@ dataSources:
         - event: BastionTitleSet(indexed address,string)
           handler: handleBastionTitleSet
       file: ./src/mercenary-v3.ts
+
+        # ---------- MERCENARY V4 ----------
+  - kind: ethereum
+    name: MercenaryV4
+    network: base
+    source:
+      address: "0x484d4ae1C70c938a4819B04d4b08DCBFf9639094"
+      abi: MercenaryV4
+      startBlock: 43261642
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - MercenarySlotV4
+        - MercenaryTokenProtectionV4
+        - DefenderProfileV4
+        - MercenaryCleanupV4
+        - MercenaryTitleV4
+        - MercenaryPointsEventV4
+      abis:
+        - name: MercenaryV4
+          file: ./abis/MercenaryV4.json
+      eventHandlers:
+        - event: ProtectionSet(indexed address,indexed uint8,indexed uint256,uint8,uint64,uint64)
+          handler: handleProtectionSetV4
+        - event: ProtectionExtended(indexed address,indexed uint8,indexed uint256,uint64,uint64,uint256)
+          handler: handleProtectionExtendedV4
+        - event: ProtectionCancelled(indexed address,indexed uint8,indexed uint256,uint64,string)
+          handler: handleProtectionCancelledV4
+        - event: ProtectionMoved(indexed address,indexed uint8,indexed uint256,uint256,uint64,uint64)
+          handler: handleProtectionMovedV4
+        - event: EmergencyProtectionMoved(indexed address,indexed uint8,indexed uint256,uint256,uint64,uint64)
+          handler: handleEmergencyProtectionMovedV4
+        - event: ProtectionExpired(indexed address,indexed uint8,indexed uint256,uint64)
+          handler: handleProtectionExpiredV4
+        - event: ProtectionSlotUnlocked(indexed address,uint8)
+          handler: handleProtectionSlotUnlockedV4
+        - event: DefenderPointsAwarded(indexed address,indexed uint256,uint256,string)
+          handler: handleDefenderPointsAwardedV4
+        - event: CleanupRewardPaid(indexed address,indexed uint256,uint256,uint256)
+          handler: handleCleanupRewardPaidV4
+        - event: BastionTitleSet(indexed address,string)
+          handler: handleBastionTitleSetV4
+      file: ./src/mercenary-v4.ts
